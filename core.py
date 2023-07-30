@@ -4,6 +4,9 @@
 # player2 = Arnaldor Shuatseneguer
 
 from colorama import Fore, init
+from colorama import Back, init
+from itertools import zip_longest
+
 init()
 
 
@@ -11,6 +14,15 @@ SPECIAL_MOVES_Tonyn = ["DSDP", "SDK"]
 SPECIAL_MOVES_ARNALDOR = ["SAK", "ASAP"]
 PLAYER1 = 1
 PLAYER2 = 2
+
+TEXT_MARGEN = "   "
+TEXT_VIÑETA = "> "
+TEXT_PUNTOS = "Puntos de vida "
+TEXT_ENERGIA_RESTANTE  = "de energía"
+TEXT_GANADOR = " Gana la pelea y aún le queda"
+TEXT_EMPATE = "La pelea finalizó con un empate"
+TEXT_BATALLA_INICIA = "-------------------------- Inicia la Batalla en Talana Kombat --------------------------"
+TEXT_BATALLA_FINALIZA = "------------------------ Fin de la Batalla en Talana Kombat ------------------------"
 
 class AtaqueEspecial:
     def __init__(self,nombre, combinacion, danio):
@@ -53,26 +65,6 @@ def contar_botones(comb):
 def contar_golpes(comb):
     return sum(1 for c in comb if c in 'KP')
 
-# Mostrar el resultado
-#print("joined:", joined)
-
-# Datos de los jugadores
-""" jugador1 = {
-    "nombre": "Jugador 1",
-    "combinacion": "P"
-}
-
-jugador2 = {
-    "nombre": "Jugador 2",
-    "combinacion": "A"
-} """
-
-# Decidir quién inicia la batalla
-#iniciador = decidir_iniciador(jugador1, jugador2)
-
-# Mostrar el resultado
-#print(f"El jugador que inicia la batalla es: {iniciador}")
-
 
 def decidir_iniciador(jugador1, jugador2):
     # Obtener las combinaciones de botones de ambos jugadores
@@ -80,11 +72,10 @@ def decidir_iniciador(jugador1, jugador2):
     comb_jugador2 = combine_botones(jugador2.datos_comb["movimientos"], jugador2.datos_comb["golpes"])
 
     # Calcular el número de botones y golpes de cada jugador
-    botones_jugador1 = contar_botones(comb_jugador1)
-    botones_jugador2 = contar_botones(comb_jugador2)
-    golpes_jugador1 = contar_golpes(comb_jugador1)
-    golpes_jugador2 = contar_golpes(comb_jugador2)
-
+    botones_jugador1 = contar_botones(comb_jugador1[0])
+    botones_jugador2 = contar_botones(comb_jugador2[0])
+    golpes_jugador1 = contar_golpes(comb_jugador1[0])
+    golpes_jugador2 = contar_golpes(comb_jugador2[0])
 
     # Comparar el número de botones para determinar el iniciador
     if botones_jugador1 < botones_jugador2:
@@ -118,9 +109,9 @@ def inicializar_players(datos_combate):
     arnaldor = Arnaldor(datos_combate["player2"])
 
     if decidir_iniciador(tonyn, arnaldor) == 1:
-        elaborar_info_pelea(tonyn, arnaldor)
+        return elaborar_info_pelea(tonyn, arnaldor)
     else:
-        elaborar_info_pelea(arnaldor, tonyn)
+        return elaborar_info_pelea(arnaldor, tonyn)
 
 ###################################################################################################################################
 
@@ -132,43 +123,46 @@ def elaborar_info_pelea(player_A, player_B):
     player_B_moves = player_B.datos_comb["movimientos"]
     player_B_punches = player_B.datos_comb["golpes"]
 
-    print("---------procesando batalla----------")
+    print()
+    print(Fore.WHITE + Back.LIGHTMAGENTA_EX + TEXT_BATALLA_INICIA + Fore.RESET + Back.RESET)
+    print()
 
     playerB_energy = player_B.puntos_salud
     playerA_energy = player_A.puntos_salud
 
-    for pA_move, pA_punch, pB_move, pB_punch in zip(player_A_moves, player_A_punches, player_B_moves, player_B_punches):
+    for pA_move, pA_punch, pB_move, pB_punch in zip_longest(player_A_moves, player_A_punches, player_B_moves, player_B_punches, fillvalue=""):
 
         moveA, damage1 = procesar_jugador(player_A.tipo_player, pA_move.upper(), pA_punch.upper())
         moveB, damage2 = procesar_jugador(player_B.tipo_player, pB_move.upper(), pB_punch.upper())
 
         playerB_energy -= damage1
 
-        #print("---movimientos de Player A--")
-        print(Fore.GREEN + player_A.nombre + " " + moveA + Fore.RESET)
-        print("Puntos de vida " + player_B.nombre + ": " + str(max(playerB_energy, 0)))
+        print(Fore.GREEN + TEXT_MARGEN + TEXT_VIÑETA + player_A.nombre + " " + moveA + Fore.RESET)
+        #print(TEXT_PUNTOS + player_B.nombre + ": " + str(max(playerB_energy, 0)))
         
         if playerB_energy <= 0:
-            print(player_A.nombre +  " Gana la pelea y aún le queda", playerA_energy, "de energía")
-            return player_A.nombre
+            print()
+            return print(Fore.BLACK + Back.LIGHTBLUE_EX + TEXT_MARGEN + player_A.nombre + TEXT_GANADOR, playerA_energy, TEXT_ENERGIA_RESTANTE + Fore.RESET + Back.RESET)
         
         playerA_energy -= damage2
 
-        #print("---movimientos de Player B--")
-        print(Fore.BLUE + player_B.nombre + " " + moveB + Fore.RESET)
-        print("Puntos de vida " + player_A.nombre + ": " + str(max(playerA_energy, 0)))
+        print(Fore.BLUE + TEXT_MARGEN + TEXT_VIÑETA + player_B.nombre + " " + moveB + Fore.RESET)
+        print()
+        #print(TEXT_PUNTOS + player_A.nombre + ": " + str(max(playerA_energy, 0)))
 
         if playerA_energy <= 0:
-            print(player_B.nombre + " Gana la pelea y aún le queda", playerB_energy, "de energía")
-            return player_B.nombre
+            print()
+            return print(Fore.BLACK + Back.LIGHTBLUE_EX + TEXT_MARGEN + player_B.nombre + TEXT_GANADOR, playerB_energy, TEXT_ENERGIA_RESTANTE + Fore.RESET + Back.RESET)
         
-    return print("empate")
+    return print(Fore.BLACK + Back.LIGHTBLUE_EX + TEXT_MARGEN  + TEXT_EMPATE + Fore.RESET + Back.RESET)
 
 
 def ejecutar_accion(player, moves, hit):
-    accion = "No hace nada", 0
+    accion = "se queda quieto", 0
     mov = procesar_movimiento(player, moves)
     
+    if len(moves) == 0 and len(hit) == 0:
+        return accion
     if len(mov) > 0 and len(hit) > 0:
         accion =  procesar_golpe(hit, mov)
     elif len(mov) > 0 and len(hit) < 1:
@@ -194,7 +188,7 @@ def procesar_movimiento(player, mov):
         return "avanza"
     elif len(mov) == 1 and mov == "A" and player == PLAYER2:
         return "avanza"
-    elif len(mov) > 1:
+    elif len(mov) >= 1:
         return "se mueve"
     else:
         return ""
@@ -231,44 +225,6 @@ def procesar_jugador(player, move, hit):
         return ejecutar_combo_arnaldor(move, hit)
 
 
-def procesar_JSON(datos_combate):
-    player1_moves = datos_combate["player1"]["movimientos"]
-    player1_punches = datos_combate["player1"]["golpes"]
-
-    player2_moves = datos_combate["player2"]["movimientos"]
-    player2_punches = datos_combate["player2"]["golpes"]
-
-    print("---------procesando batalla----------")
-
-    player1_energy = 6
-    player2_energy = 6
-
-    for p1_move, p1_punch, p2_move, p2_punch in zip(player1_moves, player1_punches, player2_moves, player2_punches):
-  
-        #player1_combinations = p1_move + p1_punch
-        #player2_combinations = p2_move + p2_punch
-
-        move1, damage1 = procesar_jugador(PLAYER1, p1_move.upper(), p1_punch.upper())
-        move2, damage2 = procesar_jugador(PLAYER2, p2_move.upper(), p2_punch.upper())
-
-        player2_energy -= damage1
-        player1_energy -= damage2
-
-        print("---movimientos de Tonyn--")
-        print(Fore.GREEN + "Tonyn " + move1 + Fore.RESET)
-        print("---movimientos de Arnaldor--")
-        print(Fore.BLUE + "Arnaldor "+ move2 + Fore.RESET)
-
-        if player2_energy <= 0:
-            print("Tonyn Gana la pelea y aún le queda", max(player1_energy, 0), "de energía")
-            return "Tonyn"
-        elif player1_energy <= 0:
-            print("Arnaldor Gana la pelea y aún le queda", max(player2_energy, 0), "de energía")
-            return "Arnaldor"
-    
-    return print("empate")
-
-
 # Ejemplos de uso:
 
 # Resultado: Arnaldor Gana la pelea y aun le queda 2 de energía  
@@ -290,13 +246,13 @@ fight_data3 = {
     "player2":{"movimientos":["", "ASA", "DA", "AAA", "", "SA"],"golpes":["P", "", "P", "K", "K", "K"]}
 }
 
-#ganador = talana_kombat_jrpg(fight_data)
-#print("Resultado final:", ganador)
+# Resultado Gana Arnaldor
+fight_data4 = {
+    "player1":{"movimientos":["DSD", "S"] ,"golpes":[ "P", ""]}, 
+    "player2":{"movimientos":["", "ASA", "DA", "AAA", "", "SA"],"golpes":["P", "", "P", "", "", ""]}
+}
 
-#procesar_JSON(fight_data1)
-
-# falta el turno de quien golpea primero 
-
-print(inicializar_players(fight_data3))
-
-# falta que la pelea continue cuando un jugador se queda sin moviemintops pero el otro si tiene aun ataques
+inicializar_players(fight_data1)
+inicializar_players(fight_data2)
+inicializar_players(fight_data3)
+inicializar_players(fight_data4)
