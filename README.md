@@ -62,6 +62,9 @@ Desafío de programación desarrollado en Python
     docker-compose up
     ```
 
+    
+    ![Mi imagen](images/print6.JPG)
+
 ### Ejemplos
 
 ##### Resultado 1: Arnaldor Gana la pelea y aun le queda 2 de energía
