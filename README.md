@@ -62,8 +62,8 @@ Desafío de programación desarrollado en Python
     docker-compose up
     ```
 
-    
-    ![Mi imagen](images/print6.JPG)
+
+    ![Mi imagen](images/print6.jpg)
 
 ### Ejemplos
 
