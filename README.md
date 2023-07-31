@@ -13,7 +13,7 @@ Desafío de programación desarrollado en Python
 ##### Resultado 1: Arnaldor Gana la pelea y aun le queda 2 de energía
 
 ```json
-fight_data1 = {
+{
     "player1":
         {
             "movimientos": ["D","DSD","S","DSD","SD"],
@@ -32,7 +32,7 @@ fight_data1 = {
 ##### Resultado 2: Gana Tony
 
 ```json
-fight_data2 = {
+{
     "player1":
     {
         "movimientos":["SDD", "DSD", "SA", "DSD"] ,
@@ -50,7 +50,7 @@ fight_data2 = {
 ##### Resultado 3: Gana Arnaldor
 
 ```json
-fight_data3 = {
+{
     "player1":
     {
         "movimientos":["DSD", "S"] ,
@@ -68,7 +68,7 @@ fight_data3 = {
 ##### Resultado 4: Empate
 
 ```json
-fight_data4 = {
+{
     "player1":
     {
         "movimientos":["DSD", "S"] ,
