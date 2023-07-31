@@ -30,12 +30,12 @@ def inicializar_players(datos_combate):
 def elaborar_info_pelea(player_A, player_B):
 
     #obteniendo movimientos y golpes player A
-    player_A_moves = player_A.datos_comb["movimientos"]
-    player_A_punches = player_A.datos_comb["golpes"]
+    player_A_moves = player_A.datos_combate["movimientos"]
+    player_A_punches = player_A.datos_combate["golpes"]
 
     #obteniendo movimientos y golpes player A
-    player_B_moves = player_B.datos_comb["movimientos"]
-    player_B_punches = player_B.datos_comb["golpes"]
+    player_B_moves = player_B.datos_combate["movimientos"]
+    player_B_punches = player_B.datos_combate["golpes"]
 
     # print de inicio de batalla
     print()
@@ -51,8 +51,8 @@ def elaborar_info_pelea(player_A, player_B):
     for pA_move, pA_punch, pB_move, pB_punch in zip_longest(player_A_moves, player_A_punches, player_B_moves, player_B_punches, fillvalue=""):
         
         # Obteniendo movimiento y daño de cada accion de jugador  
-        moveA, damage1 = procesar_jugador(player_A.tipo_player, pA_move.upper(), pA_punch.upper())
-        moveB, damage2 = procesar_jugador(player_B.tipo_player, pB_move.upper(), pB_punch.upper())
+        moveA, damage1 = procesar_jugador(player_A, pA_move.upper(), pA_punch.upper())
+        moveB, damage2 = procesar_jugador(player_B, pB_move.upper(), pB_punch.upper())
 
         # Se registra el daño para el segundo jugador ya que es el primero en recibir golpe
         playerB_energy -= damage1
@@ -83,10 +83,7 @@ def elaborar_info_pelea(player_A, player_B):
 
 # Metodo para Ejecutar golpes y ataques Especiales          
 def procesar_jugador(player, move, hit):
-    if player == constants.PLAYER1:
-        return Tonyn.ejecutar_combo(move, hit)
-    else:
-        return Arnaldor.ejecutar_combo(move, hit)
+    return player.ejecutar_combo(move, hit)
 
 
 ###################################################################################################################################

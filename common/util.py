@@ -13,8 +13,8 @@ def contar_golpes(comb):
 
 def decidir_iniciador(jugador1, jugador2):
     # Obtener las combinaciones de botones de ambos jugadores
-    comb_jugador1 = combine_botones(jugador1.datos_comb["movimientos"], jugador1.datos_comb["golpes"])
-    comb_jugador2 = combine_botones(jugador2.datos_comb["movimientos"], jugador2.datos_comb["golpes"])
+    comb_jugador1 = combine_botones(jugador1.datos_combate["movimientos"], jugador1.datos_combate["golpes"])
+    comb_jugador2 = combine_botones(jugador2.datos_combate["movimientos"], jugador2.datos_combate["golpes"])
 
     # Calcular el número de botones y golpes de cada jugador
     botones_jugador1 = contar_botones(comb_jugador1[0])
