@@ -1,0 +1,5 @@
+version: "3"
+services:
+  talana:
+    build: .
+    container_name: talana-desafio
