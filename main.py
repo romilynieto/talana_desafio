@@ -7,8 +7,7 @@ from colorama import Back, init
 from itertools import zip_longest
 from player.arnaldor import Arnaldor
 from player.tonyn import Tonyn
-from common.util import Util
-from game.battle import Batlle
+from common.util import decidir_iniciador
 import common.constants as constants
 
 init()
@@ -20,7 +19,7 @@ def inicializar_players(datos_combate):
     tonyn = Tonyn(datos_combate["player1"])
     arnaldor = Arnaldor(datos_combate["player2"])
 
-    if Util.decidir_iniciador(Util,tonyn, arnaldor) == 1:
+    if decidir_iniciador(tonyn, arnaldor) == 1:
         return elaborar_info_pelea(tonyn, arnaldor)
     else:
         return elaborar_info_pelea(arnaldor, tonyn)

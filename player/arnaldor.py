@@ -1,6 +1,6 @@
 import common.constants as constants
 from game.special_atack import AtaqueEspecial
-from game.battle import Batlle
+from game.battle import ejecutar_accion
 
 class Arnaldor:
     nombre =  "Arnaldor"
@@ -21,6 +21,6 @@ class Arnaldor:
                 ataque = item.nombre, item.danio
 
         if ataque[0] == "" and ataque[1] == 0:
-            ataque = Batlle.ejecutar_accion(Batlle, constants.PLAYER2, moves, hit)
+            ataque = ejecutar_accion(constants.PLAYER2, moves, hit)
 
         return ataque
