@@ -7,30 +7,30 @@ Desafío de programación desarrollado en Python
 ### Installing
 
 #### WINDOWS
-- PASO 0: Ejecutar en la raiz 
+- **PASO 0:** Ejecutar en la raiz 
     ```powershell
     python3 -m venv venv
     ```
 
-- PASO 1: Ejecutar en powershell 
+- **PASO 1:** Ejecutar en powershell 
 
     ```powershell
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     ```
 
-- PASO 2: Ejecutar 
+- **PASO 2:** Ejecutar 
 
     ```powershell
     .\venv\Scripts\Activate.ps1
     ```
 
-- PASO 3: Ejecutar 
+- **PASO 3:** Ejecutar 
 
     ```powershell
     pip install -r requirements.txt
     ```
 
-- PASO 4: Ejecutar
+- **PASO 4:** Ejecutar
 
     ```powershell
     docker-compose up
@@ -39,23 +39,23 @@ Desafío de programación desarrollado en Python
     ![Mi imagen](images/print5.PNG)
 
 #### MAC OS
-- PASO 0: Ejecutar en la raiz 
+- **PASO 0:** Ejecutar en la raiz 
 
     ```bash
     python3 -m venv venv
     ```
 
-- PASO 1: 
+- **PASO 1:** 
     ```bash
     . venv/bin/activate
     ```
 
-- PASO 2: Ejecutar 
+- **PASO 2:** Ejecutar 
 
     ```bash
     pip install -r requirements.txt
     ```
-- PASO 3: Ejecutar
+- **PASO 3:** Ejecutar
 
     ```bash
     docker-compose up
