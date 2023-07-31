@@ -63,7 +63,7 @@ Desafío de programación desarrollado en Python
     ```
 
 
-    ![Mi imagen](images/print6.jpg)
+    ![Mi imagen](images/print6.jpeg)
 
 ### Ejemplos
 
