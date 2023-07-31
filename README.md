@@ -6,6 +6,7 @@ Desafío de programación desarrollado en Python
 
 ### Installing
 
+#### DOCKER:
 #### WINDOWS
 - **PASO 0:** Ejecutar en la raiz 
     ```powershell
@@ -60,9 +61,6 @@ Desafío de programación desarrollado en Python
     ```bash
     docker-compose up
     ```
-    
-
-### Building
 
 ### Ejemplos
 
