@@ -8,9 +8,7 @@ Desafío de programación desarrollado en Python
 
 ### Building
 
-### Examples
-
-#### Ejemplos de uso
+### Ejemplos
 
 ##### Resultado 1: Arnaldor Gana la pelea y aun le queda 2 de energía
 
@@ -29,6 +27,8 @@ fight_data1 = {
 }
 ```
 
+![Mi imagen](images/print1.JPG)
+
 ##### Resultado 2: Gana Tony
 
 ```json
@@ -45,6 +45,7 @@ fight_data2 = {
     }
 }
 ```
+![Mi imagen](images/print2.JPG)
 
 ##### Resultado 3: Gana Arnaldor
 
@@ -62,6 +63,7 @@ fight_data3 = {
     }
 }
 ```
+![Mi imagen](images/print3.JPG)
 
 ##### Resultado 4: Empate
 
@@ -79,6 +81,8 @@ fight_data4 = {
     }
 }
 ```
+
+![Mi imagen](images/print4.JPG)
 
 ## Preguntas generales
 
